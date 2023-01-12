@@ -35,6 +35,7 @@ const Home = () => {
 
     return mappedPosts.length >= 1 ? (
         <main>
+            <h1>Public Posts</h1>
             {mappedPosts}
         </main>
     ) : (

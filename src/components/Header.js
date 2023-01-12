@@ -17,29 +17,29 @@ const Header = () => {
     <header className="header flex-row">
       <div className="flex-row">
         <img src={logo} alt="dm-logo" className="logo" />
-        <h2>Soshul Mantun</h2>
+        <h2>Social Mountain</h2>
       </div>
       <nav>
         {authCtx.token ? (
           <ul className="main-nav">
             <li>
               <NavLink style={styleActiveLink} to="/">
-                Hum
+                Home
               </NavLink>
             </li>
             <li>
               <NavLink style={styleActiveLink} to="profile">
-                Praful
+                Profile
               </NavLink>
             </li>
             <li>
               <NavLink style={styleActiveLink} to="form">
-                Rite stufs
+                Posts
               </NavLink>
             </li>
             <li>
               <button className="logout-btn" onClick={() => authCtx.logout()}>
-                Logzorz
+                Logout
               </button>
             </li>
           </ul>
@@ -47,7 +47,7 @@ const Header = () => {
           <ul className="main-nav">
             <li>
               <NavLink style={styleActiveLink} to="auth">
-                Lagn or Resturg
+                Login/Register
               </NavLink>
             </li>
           </ul>

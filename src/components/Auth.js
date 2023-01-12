@@ -7,7 +7,7 @@ const Auth = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [register, setRegister] = useState(true);
+  const [register, setRegister] = useState(false);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -42,26 +42,26 @@ const Auth = () => {
 
   return (
     <main>
-      <h1>Haloo!</h1>
+      <h1>Welcome</h1>
       <form className="form auth-form" onSubmit={submitHandler}>
         <input
           className="form-input"
           type="text"
-          placeholder="Nema eg: Bawb, Jhem..."
+          placeholder="Name"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input
           className="form-input"
           type="password"
-          placeholder="Secrt Wurds eg: *******"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="form-btn">{!register ? 'Lgoin' : 'Sng Up'}</button>
+        <button className="form-btn">{register ? 'Register' : 'Login'}</button>
       </form>
-      <button className="form-btn" onClick={e => setRegister(!register)}>
-        Ned too {!register ? 'Sing Uppz' : 'Logunn' }?
+      <button className="form-btn" onClick={() => setRegister(!register)}>
+        Need to {register ? 'Login' : 'Register' }?
       </button>
     </main>
   );
