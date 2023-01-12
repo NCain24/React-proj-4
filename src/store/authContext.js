@@ -18,7 +18,9 @@ const calculateRemainingTime = (exp) => {
 
 const getLocalData = () => {
   const storedToken = localStorage.getItem('token')
-  const storedExp = localStorage.getItem('exp')
+  const storedExp = localStorage.getItem( 'exp' )
+  const userId = localStorage.getItem( 'userId' )
+  const username = localStorage.getItem('username')
 
   const remainingTime = calculateRemainingTime(storedExp)
 
@@ -32,6 +34,8 @@ const getLocalData = () => {
   return {
     token: storedToken,
     duration: remainingTime,
+    userId: +userId,
+    username
   }
 }
 
@@ -41,12 +45,14 @@ export const AuthContextProvider = (props) => {
   const localData = getLocalData()
   
   let initialToken
+  let initialId
   if (localData) {
     initialToken = localData.token
+    initialId = localData.userId
   }
 
   const [token, setToken] = useState(initialToken)
-  const [userId, setUserId] = useState(null)
+  const [userId, setUserId] = useState(initialId)
 
 
   const logout = useCallback(() => {
@@ -65,7 +71,9 @@ export const AuthContextProvider = (props) => {
     setToken(token)
     setUserId(userId)
     localStorage.setItem('token', token)
-    localStorage.setItem('exp', exp)
+    localStorage.setItem( 'exp', exp )
+    localStorage.setItem( 'userId', userId )
+    // localStorage.setItem('username', username)
 
     const remainingTime = calculateRemainingTime(exp)
     const logoutTimer = setTimeout(logout, remainingTime)

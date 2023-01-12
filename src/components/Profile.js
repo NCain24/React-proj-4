@@ -9,7 +9,8 @@ const Profile = () => {
     const {userId, token} = useContext(AuthContext)
 
     const [ posts, setPosts ] = useState( [] )
-    const [isOpen, setIsOpen] = useState(false);
+  const [ isOpen, setIsOpen ] = useState( false );
+  const [currentId, setCurrentId] = useState(null)
 
 
     const getUserPosts = useCallback(() => {
@@ -50,7 +51,8 @@ const Profile = () => {
             })
     }
 
-    const mappedPosts = posts.map(post => {
+  const mappedPosts = posts.map( post => {
+      console.log(post)
         return (
           <div key={post.id} className="post-card">
             <h2>{post.title}</h2>
@@ -70,21 +72,15 @@ const Profile = () => {
                 <button
                   className="primaryBtn"
                   style={{ marginLeft: 10 }}
-                  onClick={() => setIsOpen(true)}
+                  onClick={ () => { setIsOpen( true ); setCurrentId(post.id)}}
                 >
                   Delete Post
                 </button>
-                        { isOpen && <Modal setIsOpen={ setIsOpen } /> }
-                        
+                       
+  
+                
 
-                        
-                {/* <button
-                  className="form-btn"
-                  style={{ marginLeft: 10 }}
-                  onClick={() => deletePost(post.id)}
-                >
-                  delete post
-                </button> */}
+
               </div>
             )}
           </div>
@@ -92,15 +88,18 @@ const Profile = () => {
     })
 
     return mappedPosts.length >= 1 ? (
-        <main>
-            <h1>Your Posts</h1>
-            {mappedPosts}
-        </main>
+      <main>
+        <h1>Your Posts</h1>
+        {mappedPosts}
+        {isOpen && (
+          <Modal setIsOpen={setIsOpen} deletePost={deletePost} id={currentId} />
+        )}
+      </main>
     ) : (
-        <main>
-            <h1>You haven't posted yet!</h1>
-        </main>
-    )
+      <main>
+        <h1>You haven't posted yet!</h1>
+      </main>
+    );
 }
 
 export default Profile

@@ -1,6 +1,7 @@
 import styles from './Modal.module.css'
 
-const Modal = ({ setIsOpen }) => {
+const Modal = ({ setIsOpen, deletePost, id }) => {
+    console.log(id)
     return (
         <>
             <div className={ styles.darkBG } onClick={ () => setIsOpen( false ) } />
@@ -14,7 +15,7 @@ const Modal = ({ setIsOpen }) => {
                     </div>
                     <div className={styles.modalActions}>
                         <div className={ styles.actionsContainer }>
-                            <button className={ styles.deleteBtn } onClick={ () => setIsOpen( false ) }>
+                            <button className={ styles.deleteBtn } onClick={ () => {deletePost(id); setIsOpen(false)} }>
                                 Delete
                             </button>
                             <button className={styles.cancelBtn} onClick={() => setIsOpen(false)}>Cancel</button>
